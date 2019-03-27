@@ -1,0 +1,32 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PrivEdit" GeneratedClassName="ucfg">
+  <Profiles />
+  <Settings>
+    <Setting Name="test_html" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;My First Heading&lt;/h1&gt;
+&lt;p&gt;My first paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</Value>
+    </Setting>
+    <Setting Name="opac" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">siyah</Value>
+    </Setting>
+    <Setting Name="tabList" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="scheme" Type="MetroFramework.MetroColorStyle" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
