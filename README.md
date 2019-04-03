@@ -2,7 +2,7 @@
 ->CHANGELOGS<-
 dd/mm/yyyy
 <br/>
-[03.04.2019]<br/>
+<b>[03.04.2019]</b><br/>
 +Code Cleaned.<br/>
 +Some Bugs Fixed<br/>
 +Object Renames<br/>
