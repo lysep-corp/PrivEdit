@@ -12,37 +12,23 @@ using System.IO;
 using System.Diagnostics;
 using MetroFramework;
 using MetroFramework.Forms;
+using PrivEdit.Lib;
 namespace PrivEdit
 {
     public partial class PrivEditForm : MetroFramework.Forms.MetroForm
     {
+        #region Main Functions
         public PrivEditForm()
         {
             InitializeComponent();
-
         }
-
         private void PrivEditForm_Load(object sender, EventArgs e)
         {
-            temaGuncelle();
+            updateTheme();
             editorControl.DrawMode = TabDrawMode.OwnerDrawFixed;
-            //editorControl.DrawItem += new DrawItemEventHandler(this.editorControl_DrawItem);
-            editorControl.DrawItem += new DrawItemEventHandler(this.editorControl_DrawItem_1);
             editorControl.MouseClick += new MouseEventHandler(this.CloseButtonClick);
-            //editorControl.Padding = new Point(10, 3);
-            //string[] paths = splitTabs();
-            //foreach (var item in paths)
-            //{
-            //    DosyaAc(item);
-            //}
         }
-
-        private string[] splitTabs()
-        {
-            return ucfg.Default.tabList.Split('\n');
-        }
-        #region Sabit fonksiyonlar
-        public void Guncelle()
+        public void MainUpdate()
         {
             this.Update();
             this.UpdateBounds();
@@ -50,32 +36,46 @@ namespace PrivEdit
             this.UpdateStyles();
             this.UpdateZOrder();
         }
-        public void temaGuncelle()
+        public void updateTheme()
         {
             MetroColorStyle scheme = ucfg.Default.scheme;
             this.Opacity = ucfg.Default.opac;
-            if (ucfg.Default.theme == "Beyaz")
+            if (ucfg.Default.theme == "Light")
             {
                 this.Theme = MetroFramework.MetroThemeStyle.Default;
                 metroPanel1.Theme = MetroFramework.MetroThemeStyle.Default;
                 editorControl.Theme = MetroFramework.MetroThemeStyle.Default;
                 statusLabel.Theme = MetroFramework.MetroThemeStyle.Default;
-                menuStrip1.BackColor = Color.White;
-                menuStrip1.ForeColor = Color.FromArgb(10, 10, 10);
-
+                upperMenu.BackColor = Color.White;
+                upperMenu.ForeColor = Color.FromArgb(10, 10, 10);
             }
             else
             {
                 this.Theme = MetroFramework.MetroThemeStyle.Dark;
-                menuStrip1.BackColor = Color.FromArgb(17, 17, 17);
-                menuStrip1.ForeColor = Color.FromArgb(241, 241, 241);
+                upperMenu.BackColor = Color.FromArgb(17, 17, 17);
+                upperMenu.ForeColor = Color.FromArgb(241, 241, 241);
             }
             this.Style = scheme;
             metroPanel1.Style = scheme;
             editorControl.Style = scheme;
             statusLabel.Style = scheme;
         }
-        public void Yeni()
+        private void UpdateHeader()
+        {
+            try
+            {
+                foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+                {
+                    this.Text = "Priv Edit - " + editorControl.SelectedTab.Text;
+                }
+            }
+            catch
+            {
+                this.Text = "Priv Edit";
+            }
+            this.UpdateStyles();
+        }
+        public void New()
         {
             PrivLib.edSci Tab = new PrivLib.edSci();
             Tab.TabID = global.IDCounter;
@@ -86,14 +86,10 @@ namespace PrivEdit
             Tab.KeyPress += new KeyPressEventHandler(this.scintillaAsciiBlocker);
             Tab.UpdateUI += new EventHandler<ScintillaNET.UpdateUIEventArgs>(this.CursorDetector);
             Tab.TextChanged += new EventHandler(this.LineCounter);
-
             foreach (var style in Tab.Styles)
             {
-                if (ucfg.Default.theme == "Beyaz")
-                {
-
-
-                }
+                if (ucfg.Default.theme == "Light")
+                {}
                 else
                 {
                     style.BackColor = Color.FromArgb(20, 20, 20);
@@ -101,12 +97,12 @@ namespace PrivEdit
                     Tab.CaretForeColor = Color.FromArgb(254, 254, 254);
                 }
             }
-            editorControl.TabPages.Add("Yeni Dosya" + " [x]");
+            editorControl.TabPages.Add("New File" + " [x]");
             editorControl.SelectTab(editorControl.TabPages.Count-1);
             editorControl.SelectedTab.Controls.Add(Tab);
             global.IDCounter++;
         }
-        public void DosyaAc(string filename)
+        public void OpenFile(string filename)
         {
             PrivLib.edSci Tab = new PrivLib.edSci();
             Tab.TabID = global.IDCounter;
@@ -119,20 +115,15 @@ namespace PrivEdit
             Tab.Dock = DockStyle.Fill;
             Tab.Text = File.ReadAllText(filename);
             Tab.EmptyUndoBuffer();
-
-
             foreach (var style in Tab.Styles)
             {
-                if (ucfg.Default.theme == "Beyaz")
-                {
-
-                }
+                if (ucfg.Default.theme == "Light")
+                {}
                 else
                 {
                     style.BackColor = Color.FromArgb(20, 20, 20);
                     style.ForeColor = Color.FromArgb(254, 254, 254);
                     Tab.CaretForeColor = Color.FromArgb(254, 254, 254);
-
                 }
             }
             editorControl.TabPages.Add(PrivLib.splitPath(filename) + " [x]");
@@ -140,9 +131,8 @@ namespace PrivEdit
             editorControl.SelectedTab.Controls.Add(Tab);
             global.IDCounter++;
         }
-        private void FarkliKaydet()
+        private void SaveAs()
         {
-
             if(editorControl.TabCount > 0)
             {
                 var result = FileSaver.ShowDialog();
@@ -153,106 +143,120 @@ namespace PrivEdit
                         File.WriteAllText(FileSaver.FileName, item.Text);
                         item.Path = FileSaver.FileName;
                         editorControl.SelectedTab.Text = PrivLib.splitPath(FileSaver.FileName);
-                        BaslikGuncelleme();
-
-
+                        UpdateHeader();
                     }
                 }
             }
         }
-        private void Kaydet()
+        private void Save()
         {
             if (editorControl.TabCount > 0) { 
                 foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
-            {
-                if (item.Path != "" && item.Path != "null")
                 {
-
-                    File.WriteAllText(item.Path, item.Text);
-                    editorControl.SelectedTab.Text = PrivLib.splitPath(item.Path);
-                    BaslikGuncelleme();
+                    if (item.Path != "" && item.Path != "null")
+                    {
+                        File.WriteAllText(item.Path, item.Text);
+                        editorControl.SelectedTab.Text = PrivLib.splitPath(item.Path);
+                        UpdateHeader();
+                    }
+                    else
+                    {
+                        SaveAs();
+                    }
                 }
-                else
-                {
-                    FarkliKaydet();
-                }
-
-            }
             }
         }
-        private void Ac()
+        private void Open()
         {
             int size = -1;
             DialogResult dialogResult = FileOpener.ShowDialog();
-            if (dialogResult == DialogResult.OK) // Test result.
+            if (dialogResult == DialogResult.OK)
             {
                 if (FileOpener.CheckFileExists)
                 {
                     string file = FileOpener.FileName;
                     try
                     {
-                        DosyaAc(file);
+                        OpenFile(file);
                     }
                     catch (IOException)
                     {
-                        MessageBox.Show("Dosya Açılırken hata oluştu!", "Hata");
+                        MessageBox.Show("An error returned while opening file!", "ERROR!");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Dosya bulunamadı!", "Hata");
+                    MessageBox.Show("File not found!", "ERROR!");
                 }
             }
         }
-        private void BaslikGuncelleme()
+        private void PrivEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try {
-                foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
-                {
-                    this.Text = "Priv Edit - "+ editorControl.SelectedTab.Text;
-
-                }
-            }
-            catch
+            int n = 0;
+            foreach (TabControl.TabPageCollection item in editorControl.TabPages)
             {
-                this.Text = "Priv Edit";
+                foreach (Control.ControlCollection titem in item)
+                {
+                    foreach (PrivLib.edSci kitem in titem)
+                    {
+                        kitem.checkChanged();
+                        if (kitem.ChangedPoint)
+                        {
+                            editorControl.SelectTab(n);
+                            DialogResult dr = MetroMessageBox.Show(this, "\n\n Do you want to save " + kitem.Filename + " ?", "Nope | Yes", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (dr == DialogResult.Yes)
+                            {
+                                SaveAs();
+                                tabRec_Add(kitem.Path);
+                            }
+                        }
+                        else
+                        {
+                            if (kitem.Path == "null") { }
+                            else
+                            {
+                                tabRec_Add(kitem.Path);
+                            }
+
+                        }
+                    }
+                }
+                n++;
             }
-            this.UpdateStyles();
         }
         #endregion
+
         #region Events
         #region Tab Name Handling
-
         private void editorControl_UpdateForm(object sender, EventArgs e)
         {
-            BaslikGuncelleme();
-
+            UpdateHeader();
         }
         #endregion
+
         #region menuStrip
         private void açToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ac();
+            Open();
         }
         private void FarklıKaydetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FarkliKaydet();
+            SaveAs();
 
         }
         private void kaydetToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Kaydet();
+            Save();
         }
         private void yeniDosyaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Yeni();
+            New();
         }
         private void temaAyarlarıToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ThemeSettings themeset = new ThemeSettings();
             themeset.Show();
         }
-
         private void geriALToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
@@ -260,7 +264,6 @@ namespace PrivEdit
                 item.Undo();
             }
         }
-
         private void birAdımİleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
@@ -268,7 +271,6 @@ namespace PrivEdit
                 item.Redo();
             }
         }
-
         private void düzenToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -281,6 +283,7 @@ namespace PrivEdit
             }
         }
         #endregion
+
         #region Word Handling
         private void scintillaAsciiBlocker(object sender, KeyPressEventArgs e)
         {
@@ -289,17 +292,14 @@ namespace PrivEdit
                 e.Handled = true;
                 return;
             }
-
         }
         private void CursorDetector(object sender, ScintillaNET.UpdateUIEventArgs e)
         {
-
             foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
             {
-                statusLabel.Text = "Satır : " + item.CurrentLine.ToString() + ", Karakter : " + (item.CurrentPosition - item.Lines[item.LineFromPosition(item.CurrentPosition)].Position) + ", Pozisyon : " + item.CurrentPosition.ToString();
+                statusLabel.Text = "Line : " + item.CurrentLine.ToString() + ", Character : " + (item.CurrentPosition - item.Lines[item.LineFromPosition(item.CurrentPosition)].Position) + ", Position : " + item.CurrentPosition.ToString();
             }
         }
-
         private void LineCounter(object sender, EventArgs e)
         {
             PrivLib.edSci handler = (PrivLib.edSci)sender;
@@ -322,9 +322,8 @@ namespace PrivEdit
             }
             else
             {
-                editorControl.SelectedTab.Text = "Yeni Dosya*" + " [x]";
+                editorControl.SelectedTab.Text = "New File*" + " [x]";
             }
-
             var maxLineNumberCharLength = handler.Lines.Count.ToString().Length;
             if (maxLineNumberCharLength == handler.MaxLineNumberCharLength)
             { 
@@ -335,17 +334,14 @@ namespace PrivEdit
             handler.MaxLineNumberCharLength = maxLineNumberCharLength;
         }
         #endregion
-        #region Draws
-        #endregion
 
-        #endregion
+        #region Draws
+        private string[] splitTabs()
+        {
+            return ucfg.Default.tabList.Split('\n');
+        }
         private Point _imageLocation = new Point(13, 5);
         private Point _imgHitArea = new Point(20, 5);
-
-        private void editorControl_DrawItem(object sender, DrawItemEventArgs e)
-        {
-
-        }
         private void CloseButtonClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             TabControl tc = (TabControl)sender;
@@ -356,79 +352,21 @@ namespace PrivEdit
             r.Offset(_tabWidth, _imgHitArea.Y);
             r.Width = 16;
             r.Height = 16;
-
             if (editorControl.SelectedIndex >= 0)
             {
-                //Debug.Print(p.ToString() + "," + r.Location);
-
-
                 if (r.Contains(p))
                 {
                     TabPage TabP = (TabPage)tc.TabPages[tc.SelectedIndex];
                     tc.TabPages.Remove(TabP);
                 }
-
             }
         }
         public void tabRec_Add(string path)
         {
             ucfg.Default.tabList = ucfg.Default.tabList + path + "\n";
         }
-        private void PrivEditForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            int n = 0;
-            foreach (TabControl.TabPageCollection item in editorControl.TabPages)
-            {
+        #endregion
 
-                foreach (Control.ControlCollection titem in item)
-                {
-                    foreach (PrivLib.edSci kitem in titem)
-                    {
-                        kitem.checkChanged();
-                        if (kitem.ChangedPoint)
-                        {
-                            editorControl.SelectTab(n);
-                            DialogResult dr = MetroMessageBox.Show(this, "\n\n"+kitem.Filename+" adlı dosyayı kaydetmek istermisiniz ?", "Hayır | Evet", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (dr == DialogResult.Yes)
-                            {
-                                FarkliKaydet();
-                                tabRec_Add(kitem.Path);
-                            }
-                            
-                        }
-                        else
-                        {
-                            if(kitem.Path == "null") {
-
-                            }
-                            else
-                            {
-                                tabRec_Add(kitem.Path);
-
-                            }
-
-                        }
-                    }
-                }
-                n++;
-            }
-        }
-
-        private void kaydtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void editorControl_DrawItem_1(object sender, DrawItemEventArgs e)
-        {
-            try
-            {
-                //e.Graphics.DrawString("x", e.Font, Brushes.Red, e.Bounds.Right - 15, e.Bounds.Top + 4);
-                //e.Graphics.DrawString(this.editorControl.TabPages[e.Index].Text, e.Font, Brushes.Red, e.Bounds.Left + 12, e.Bounds.Top + 4);
-                //e.DrawFocusRectangle();
-            }
-            catch (Exception) { }
-
-        }
+        #endregion
     }
 }

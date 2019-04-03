@@ -50,7 +50,7 @@ namespace PrivEdit {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("siyah")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dark")]
         public string theme {
             get {
                 return ((string)(this["theme"]));

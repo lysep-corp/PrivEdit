@@ -20,7 +20,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="theme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">siyah</Value>
+      <Value Profile="(Default)">Dark</Value>
     </Setting>
     <Setting Name="tabList" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
