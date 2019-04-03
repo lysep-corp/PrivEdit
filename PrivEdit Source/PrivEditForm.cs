@@ -190,40 +190,76 @@ namespace PrivEdit
                 }
             }
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //Will be fixed but i don't have time for this may be later...
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void PrivEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            int n = 0;
-            foreach (TabControl.TabPageCollection item in editorControl.TabPages)
-            {
-                foreach (Control.ControlCollection titem in item)
-                {
-                    foreach (PrivLib.edSci kitem in titem)
-                    {
-                        kitem.checkChanged();
-                        if (kitem.ChangedPoint)
-                        {
-                            editorControl.SelectTab(n);
-                            DialogResult dr = MetroMessageBox.Show(this, "\n\n Do you want to save " + kitem.Filename + " ?", "Nope | Yes", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (dr == DialogResult.Yes)
-                            {
-                                SaveAs();
-                                tabRec_Add(kitem.Path);
-                            }
-                        }
-                        else
-                        {
-                            if (kitem.Path == "null") { }
-                            else
-                            {
-                                tabRec_Add(kitem.Path);
-                            }
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //int n = 0;
+            //foreach (MetroFramework.Controls.MetroTabPageCollection item in editorControl.TabPages)
+            //{
 
-                        }
-                    }
-                }
-                n++;
-            }
+            //    foreach (MetroFramework.Controls.MetroTabPage.ControlCollection titem in item)
+            //    {
+            //        foreach (PrivLib.edSci kitem in titem)
+            //        {
+            //            kitem.checkChanged();
+            //            if (kitem.ChangedPoint)
+            //            {
+            //                editorControl.SelectTab(n);
+            //                DialogResult dr = MetroMessageBox.Show(this, "\n\n" + kitem.Filename + " adlı dosyayı kaydetmek istermisiniz ?", "Hayır | Evet", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (dr == DialogResult.Yes)
+            //                {
+            //                    SaveAs();
+            //                    tabRec_Add(kitem.Path);
+            //                }
+
+            //            }
+            //            else
+            //            {
+            //                if (kitem.Path == "null")
+            //                {
+
+            //                }
+            //                else
+            //                {
+            //                    tabRec_Add(kitem.Path);
+
+            //                }
+
+            //            }
+            //        }
+            //    }
+            //    n++;
+            //}
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////
+            //Will be fixed but i don't have time for this may be later...
+            //////////////////////////////////////////////////////////////////////////////////////////
         }
+        //////////////////////////////////////////////////////////////////////////////////////////
+        //Will be fixed but i don't have time for this may be later...
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+
         #endregion
 
         #region Events
