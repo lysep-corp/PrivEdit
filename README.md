@@ -7,7 +7,7 @@ dd/mm/yyyy
 +Some Bugs Fixed<br/>
 +Object Renames<br/>
 +Function Renames<br/>
-+Language swich (Talking language)<br/>
++Language swicth (Talking language)<br/>
 
 
 
