@@ -1,6 +1,6 @@
 # PrivEdit
 ->CHANGELOGS<-
-dd/mm/yyyy
+dd.mm.yyyy
 <br/>
 <b>[03.04.2019]</b><br/>
 +Code Cleaned.<br/>
