@@ -369,7 +369,9 @@
             // 
             // upperMenu
             // 
+            this.upperMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.upperMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.upperMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.upperMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.arrayMenu,
@@ -449,7 +451,7 @@
             this.clearButton.Name = "clearButton";
             this.clearButton.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.clearButton.Size = new System.Drawing.Size(180, 22);
+            this.clearButton.Size = new System.Drawing.Size(176, 22);
             this.clearButton.Text = "Clear";
             this.clearButton.Click += new System.EventHandler(this.temizleToolStripMenuItem_Click);
             // 
@@ -457,7 +459,7 @@
             // 
             this.forwardButton.Name = "forwardButton";
             this.forwardButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.forwardButton.Size = new System.Drawing.Size(180, 22);
+            this.forwardButton.Size = new System.Drawing.Size(176, 22);
             this.forwardButton.Text = "Go Forward";
             this.forwardButton.Click += new System.EventHandler(this.birAdımİleriToolStripMenuItem_Click);
             // 
@@ -465,21 +467,21 @@
             // 
             this.backButton.Name = "backButton";
             this.backButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.backButton.Size = new System.Drawing.Size(180, 22);
+            this.backButton.Size = new System.Drawing.Size(176, 22);
             this.backButton.Text = "Go Back";
             this.backButton.Click += new System.EventHandler(this.geriALToolStripMenuItem_Click);
             // 
             // arraySep1
             // 
             this.arraySep1.Name = "arraySep1";
-            this.arraySep1.Size = new System.Drawing.Size(177, 6);
+            this.arraySep1.Size = new System.Drawing.Size(173, 6);
             // 
             // findButton
             // 
             this.findButton.Enabled = false;
             this.findButton.Name = "findButton";
             this.findButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findButton.Size = new System.Drawing.Size(180, 22);
+            this.findButton.Size = new System.Drawing.Size(176, 22);
             this.findButton.Text = "Find";
             // 
             // changeButton
@@ -487,7 +489,7 @@
             this.changeButton.Enabled = false;
             this.changeButton.Name = "changeButton";
             this.changeButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.changeButton.Size = new System.Drawing.Size(180, 22);
+            this.changeButton.Size = new System.Drawing.Size(176, 22);
             this.changeButton.Text = "Change";
             // 
             // settingsMenu
@@ -506,10 +508,10 @@
             // 
             // gSettingsButton
             // 
-            this.gSettingsButton.Enabled = false;
             this.gSettingsButton.Name = "gSettingsButton";
             this.gSettingsButton.Size = new System.Drawing.Size(238, 22);
             this.gSettingsButton.Text = "General Settings";
+            this.gSettingsButton.Click += new System.EventHandler(this.gSettingsButton_Click);
             // 
             // setSep1
             // 

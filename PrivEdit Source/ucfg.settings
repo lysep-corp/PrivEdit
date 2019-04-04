@@ -28,5 +28,8 @@
     <Setting Name="scheme" Type="MetroFramework.MetroColorStyle" Scope="User">
       <Value Profile="(Default)">Default</Value>
     </Setting>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EN</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

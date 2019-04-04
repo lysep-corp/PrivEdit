@@ -7,27 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using PrivEdit.Parsers;
 namespace PrivEdit
 {
     public partial class ThemeSettings : MetroFramework.Forms.MetroForm
     {
+        static string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        string LanguageFile = path + @"\Languages\" + ucfg.Default.language + ".json";
         public ThemeSettings()
         {
             InitializeComponent();
         }
         private void Settings_Load(object sender, EventArgs e)
         {
-            this.Style = ucfg.Default.scheme;
-            this.opacLabel.Style = ucfg.Default.scheme;
-            this.themeLabel.Style = ucfg.Default.scheme;
-            this.infoLabel.Style = ucfg.Default.scheme;
-            this.colorLabel.Style = ucfg.Default.scheme;
-            this.themeCombo.Style = ucfg.Default.scheme;
-            this.opacTrack.Style = ucfg.Default.scheme;
-            this.colorCombo.Style = ucfg.Default.scheme;
+            UpdateLanguage();
+            LoadThemeList();
+            ThemeHandler();
+        }
+        private void UpdateLanguage()
+        {
+            if (ucfg.Default.language != "EN")
+            {
+                this.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "tFormTXT");
+                opacLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "opacLabelTXT");
+                themeLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "themeLabelTXT");
+                colorLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "colorLabelTXT");
+                infoLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "infoLabelTXT");
+                themeCombo.Items.Clear();
+                themeCombo.Items.Add(Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "tDark"));
+                themeCombo.Items.Add(Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "tLight"));
+            }
+        }
+        private void LoadThemeList()
+        {
             opacTrack.Value = Convert.ToInt32(ucfg.Default.opac / 0.01);
-            themeCombo.Text = ucfg.Default.theme;
             colorCombo.Text = Convert.ToString(this.Style);
             colorCombo.Items.Add(MetroFramework.MetroColorStyle.Black);
             colorCombo.Items.Add(MetroFramework.MetroColorStyle.Blue);
@@ -45,6 +58,18 @@ namespace PrivEdit
             colorCombo.Items.Add(MetroFramework.MetroColorStyle.White);
             colorCombo.Items.Add(MetroFramework.MetroColorStyle.Yellow);
             this.Opacity = ucfg.Default.opac;
+        }
+        private void ThemeHandler()
+        {
+            this.Style = ucfg.Default.scheme;
+            this.opacLabel.Style = ucfg.Default.scheme;
+            this.themeLabel.Style = ucfg.Default.scheme;
+            this.infoLabel.Style = ucfg.Default.scheme;
+            this.colorLabel.Style = ucfg.Default.scheme;
+            this.themeCombo.Style = ucfg.Default.scheme;
+            this.opacTrack.Style = ucfg.Default.scheme;
+            this.colorCombo.Style = ucfg.Default.scheme;
+            themeCombo.Text = ucfg.Default.theme;
             if (ucfg.Default.theme == "Light")
             {
                 this.Theme = MetroFramework.MetroThemeStyle.Default;
@@ -78,7 +103,21 @@ namespace PrivEdit
         }
         private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ucfg.Default.theme = themeCombo.Text;
+            if(ucfg.Default.language != "EN")
+            {
+                if(themeCombo.Text == Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "tDark"))
+                {
+                    ucfg.Default.theme = "Dark";
+                }
+                else if(themeCombo.Text == Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "tLight"))
+                {
+                    ucfg.Default.theme = "Light";
+                }
+            }
+            else
+            {
+                ucfg.Default.theme = themeCombo.Text;
+            }
             ucfg.Default.Save();
             this.Update();
             this.Refresh();

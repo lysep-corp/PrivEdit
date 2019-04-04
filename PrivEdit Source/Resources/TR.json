@@ -1,0 +1,51 @@
+{
+    "upperMenu": {
+        "fileMenuTXT": "Dosya",
+        "newButtonTXT": "Yeni",
+        "openButtonTXT": "Aç",
+        "saveButtonTXT": "Kaydet",
+        "saveAsButtonTXT": "Farklı Kaydet",
+        "arrayMenuTXT": "Düzen",
+        "clearButtonTXT": "Temizle",
+        "forwardButtonTXT": "İleri",
+        "backButtonTXT": "Geri",
+        "findButtonTXT": "Bul",
+        "changeButtonTXT": "Değiştir",
+        "settingsMenuTXT": "Ayarlar",
+        "gSettingsButtonTXT": "Genel Ayarlar",
+        "tSettingsButtonTXT": "Tema Ayarları",
+        "scsSettingsButtonTXT": "Syntax - Renk Uyumu Ayarları",
+        "foSettingsButtonTXT": "Dosya Açma Ayarları",
+        "fsSettingsButtonTXT": "Dosya Kaydetme Ayarları",
+        "aboutMenuTXT": "Hakkında",
+        "authorsButtonTXT": "Yapımcılar",
+        "youtubeButtonTXT": "YouTube",
+        "githubButtonTXT":"GitHUB",
+        "sThanksButtonTXT": "Özel Teşekkür"
+    },
+    "messages": {
+        "permError": "Dil dosyasına ulaşılamıyor. Lütfen programın yetkilerini kontrol edin!",
+        "openFileError": "Dosyayı açarken bir hata oluştu!",
+        "fileFindError": "Dosya Bulunamadı!"
+    },
+    "texts":{
+        "newFile": "Yeni Dosya",
+        "line": "Satır",
+        "character": "Karakter",
+        "position": "Pozisyon",
+        "tDark": "Karanlık",
+        "tLight": "Açık"
+    },
+    "themeGUI": {
+        "tFormTXT": "Tema Ayarları",
+        "opacLabelTXT": "Opaklık Miktarı:",
+        "themeLabelTXT": "Ana Tema Rengi:",
+        "colorLabelTXT": "Renk Şeması:",
+        "infoLabelTXT": "**Dikkat! Ayarlar programı yeniden başlatınca uygulanır."
+    },
+    "settingsGUI": {
+        "sFormTXT": "Genel Ayarlar",
+        "langLabelTXT": "Program Dili:",
+        
+    }
+}

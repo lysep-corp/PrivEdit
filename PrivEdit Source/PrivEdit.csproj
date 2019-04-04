@@ -68,6 +68,9 @@
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
       <Private>True</Private>
@@ -85,7 +88,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneralSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneralSettings.Designer.cs">
+      <DependentUpon>GeneralSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lib\global.cs" />
+    <Compile Include="Parsers\JSON\parser.cs" />
+    <Compile Include="Parsers\XML\parser.cs" />
     <Compile Include="PrivEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +117,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ucfg.settings</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GeneralSettings.resx">
+      <DependentUpon>GeneralSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrivEditForm.resx">
       <DependentUpon>PrivEditForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +146,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\TR.json" />
     <None Include="ucfg.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ucfg.Designer.cs</LastGenOutput>
@@ -152,8 +167,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

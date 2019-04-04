@@ -59,5 +59,15 @@ namespace PrivEdit.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   System.Byte[] türünde yerelleştirilmiş bir kaynak arar.
+        /// </summary>
+        internal static byte[] TR {
+            get {
+                object obj = ResourceManager.GetObject("TR", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
