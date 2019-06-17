@@ -2,6 +2,19 @@
 ->CHANGELOGS<-
 dd.mm.yyyy
 <br/>
+<b>[18.06.2019]</b><br/>
++Code Cleaned. (Still very mess LMAO)<br/>
++Header update bug fixed<br/>
++Not closing fixed<br/>
++Splash screen added<br/>
++Now settings showing selected language<br/>
++Other language sport activated<br/>
++Exit message added the language<br/>
++Can't close file after saving bug fixed<br/>
++Performance Upgrades (Joke)<br/>
+-cylops<br/>
+
+<br/>
 <b>[03.04.2019]</b><br/>
 +Code Cleaned.<br/>
 +Some Bugs Fixed<br/>
