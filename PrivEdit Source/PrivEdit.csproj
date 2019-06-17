@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>PrivEdit</RootNamespace>
     <AssemblyName>PrivEdit</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -33,7 +33,7 @@
     <OutputPath>bin\x86\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x64|x86'">
@@ -95,6 +95,12 @@
       <DependentUpon>GeneralSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\global.cs" />
+    <Compile Include="LoadScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadScreen.Designer.cs">
+      <DependentUpon>LoadScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parsers\JSON\parser.cs" />
     <Compile Include="Parsers\XML\parser.cs" />
     <Compile Include="PrivEditForm.cs">
@@ -119,6 +125,9 @@
     </Compile>
     <EmbeddedResource Include="GeneralSettings.resx">
       <DependentUpon>GeneralSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadScreen.resx">
+      <DependentUpon>LoadScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrivEditForm.resx">
       <DependentUpon>PrivEditForm.cs</DependentUpon>

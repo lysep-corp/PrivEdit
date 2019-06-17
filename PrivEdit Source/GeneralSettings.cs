@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+using static PrivEdit.Parsers.JSON.parser;
+using static PrivEdit.Lib.global;
 namespace PrivEdit
 {
     public partial class GeneralSettings : MetroFramework.Forms.MetroForm
     {
-        static string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        string LanguageFile = path + @"\Languages\" + ucfg.Default.language + ".json";
         public GeneralSettings()
         {
             InitializeComponent();
@@ -43,29 +34,25 @@ namespace PrivEdit
             }
             else
             {
-                this.Theme = MetroFramework.MetroThemeStyle.Light;
+                Theme = MetroFramework.MetroThemeStyle.Light;
                 langCombo.Theme = MetroFramework.MetroThemeStyle.Light;
                 langLabel.Theme = MetroFramework.MetroThemeStyle.Light;
                 infoLabel.Theme = MetroFramework.MetroThemeStyle.Light;
             }
-            this.Style = ucfg.Default.scheme;
+            Style = ucfg.Default.scheme;
             langCombo.Style = ucfg.Default.scheme;
             langLabel.Style = ucfg.Default.scheme;
             infoLabel.Style = ucfg.Default.scheme;
         }
         private void LanguageHandler()
         {
-            if(ucfg.Default.language != "EN")
+            if(lang_pref != "EN")
             {
-                this.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "settingsGUI", "sFormTXT");
-                langLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "settingsGUI", "langLabelTXT");
-                infoLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "themeGUI", "infoLabelTXT");
-                langCombo.Text = ucfg.Default.language;
+                Text = ParseIt(LanguageFile, "settingsGUI", "sFormTXT");
+                langLabel.Text = ParseIt(LanguageFile, "settingsGUI", "langLabelTXT");
+                infoLabel.Text = ParseIt(LanguageFile, "themeGUI", "infoLabelTXT");
             }
-            else
-            {
-                langCombo.Text = ucfg.Default.language;
-            }
+            langCombo.PromptText = lang_pref;
         }
         private void langCombo_SelectedIndexChanged(object sender, EventArgs e)
         {

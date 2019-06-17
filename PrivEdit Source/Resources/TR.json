@@ -20,13 +20,14 @@
         "aboutMenuTXT": "Hakkında",
         "authorsButtonTXT": "Yapımcılar",
         "youtubeButtonTXT": "YouTube",
-        "githubButtonTXT":"GitHUB",
+        "githubButtonTXT": "Github",
         "sThanksButtonTXT": "Özel Teşekkür"
     },
     "messages": {
         "permError": "Dil dosyasına ulaşılamıyor. Lütfen programın yetkilerini kontrol edin!",
         "openFileError": "Dosyayı açarken bir hata oluştu!",
-        "fileFindError": "Dosya Bulunamadı!"
+        "fileFindError": "Dosya Bulunamadı!",
+        "saveFileMsg": "adlı dosyayı kaydetmak ister misiniz?"
     },
     "texts":{
         "newFile": "Yeni Dosya",
@@ -45,7 +46,7 @@
     },
     "settingsGUI": {
         "sFormTXT": "Genel Ayarlar",
-        "langLabelTXT": "Program Dili:",
+        "langLabelTXT": "Program Dili:"
         
     }
 }

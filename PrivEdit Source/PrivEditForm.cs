@@ -1,26 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Diagnostics;
 using MetroFramework;
 using MetroFramework.Forms;
-using PrivEdit.Lib;
-using Parsers = PrivEdit.Parsers;
-using System.Xml;
+using static PrivEdit.Parsers.JSON.parser;
+using static PrivEdit.Lib.global;
+using static PrivEdit.Lib.PrivLib;
 namespace PrivEdit
 {
-    public partial class PrivEditForm : MetroFramework.Forms.MetroForm
+    public partial class PrivEditForm : MetroForm
     {
-        static string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        string LanguageFile = path + @"\Languages\" + ucfg.Default.language + ".json";
         #region Main Functions
         public PrivEditForm()
         {
@@ -31,15 +21,15 @@ namespace PrivEdit
             updateTheme();
             UpdateLanguage();
             editorControl.DrawMode = TabDrawMode.OwnerDrawFixed;
-            editorControl.MouseClick += new MouseEventHandler(this.CloseButtonClick);
+            editorControl.MouseClick += new MouseEventHandler(CloseButtonClick);
         }
         public void MainUpdate()
         {
-            this.Update();
-            this.UpdateBounds();
-            this.UpdateDefaultButton();
-            this.UpdateStyles();
-            this.UpdateZOrder();
+            Update();
+            UpdateBounds();
+            UpdateDefaultButton();
+            UpdateStyles();
+            UpdateZOrder();
         }
         public void UpdateLanguage()
         {
@@ -52,59 +42,56 @@ namespace PrivEdit
                 }
                 catch (Exception ex)
                 {
-                    if (ucfg.Default.language != "EN")
+                    if (lang_pref != "EN")
                     {
-                        MetroFramework.MetroMessageBox.Show(this, Parsers.JSON.parser.ParseIt(LanguageFile, "messages", "permError") + "\n" + ex, "Error!", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, ParseIt(LanguageFile, "messages", "permError") + "\n" + ex, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        MetroFramework.MetroMessageBox.Show(this, "Error while checking Language file. Check program's permissions...\n" + ex, "Error!", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        MetroMessageBox.Show(this, "Error while checking Language file. Check program's permissions...\n" + ex, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            if(ucfg.Default.language == "EN")
-            {}
-            else if (ucfg.Default.language == "TR")
+            if(lang_pref != "EN")
             {
-                fileMenu.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu" ,"fileMenuTXT");
-                newButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "newButtonTXT");
-                openButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "openButtonTXT");
-                saveButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "saveButtonTXT");
-                saveAsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "saveAsButtonTXT");
-                arrayMenu.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "arrayMenuTXT");
-                clearButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "clearButtonTXT");
-                forwardButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "forwardButtonTXT");
-                backButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "backButtonTXT");
-                findButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "findButtonTXT");
-                changeButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "changeButtonTXT");
-                settingsMenu.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "settingsMenuTXT");
-                gSettingsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "gSettingsButtonTXT");
-                tSettingsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "tSettingsButtonTXT");
-                scsSettingsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "scsSettingsButtonTXT");
-                foSettingsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "foSettingsButtonTXT");
-                fsSettingsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "fsSettingsButtonTXT");
-                aboutMenu.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "aboutMenuTXT");
-                authorsButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "authorsButtonTXT");
-                youtubeButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "youtubeButtonTXT");
-                githubButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "githubButtonTXT");
-                sThanksButton.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "upperMenu", "sThanksButtonTXT");
+                fileMenu.Text = ParseIt(LanguageFile, "upperMenu", "fileMenuTXT");
+                newButton.Text = ParseIt(LanguageFile, "upperMenu", "newButtonTXT");
+                openButton.Text = ParseIt(LanguageFile, "upperMenu", "openButtonTXT");
+                saveButton.Text = ParseIt(LanguageFile, "upperMenu", "saveButtonTXT");
+                saveAsButton.Text = ParseIt(LanguageFile, "upperMenu", "saveAsButtonTXT");
+                arrayMenu.Text = ParseIt(LanguageFile, "upperMenu", "arrayMenuTXT");
+                clearButton.Text = ParseIt(LanguageFile, "upperMenu", "clearButtonTXT");
+                forwardButton.Text = ParseIt(LanguageFile, "upperMenu", "forwardButtonTXT");
+                backButton.Text = ParseIt(LanguageFile, "upperMenu", "backButtonTXT");
+                findButton.Text = ParseIt(LanguageFile, "upperMenu", "findButtonTXT");
+                changeButton.Text = ParseIt(LanguageFile, "upperMenu", "changeButtonTXT");
+                settingsMenu.Text = ParseIt(LanguageFile, "upperMenu", "settingsMenuTXT");
+                gSettingsButton.Text = ParseIt(LanguageFile, "upperMenu", "gSettingsButtonTXT");
+                tSettingsButton.Text = ParseIt(LanguageFile, "upperMenu", "tSettingsButtonTXT");
+                scsSettingsButton.Text = ParseIt(LanguageFile, "upperMenu", "scsSettingsButtonTXT");
+                foSettingsButton.Text = ParseIt(LanguageFile, "upperMenu", "foSettingsButtonTXT");
+                fsSettingsButton.Text = ParseIt(LanguageFile, "upperMenu", "fsSettingsButtonTXT");
+                aboutMenu.Text = ParseIt(LanguageFile, "upperMenu", "aboutMenuTXT");
+                authorsButton.Text = ParseIt(LanguageFile, "upperMenu", "authorsButtonTXT");
+                youtubeButton.Text = ParseIt(LanguageFile, "upperMenu", "youtubeButtonTXT");
+                githubButton.Text = ParseIt(LanguageFile, "upperMenu", "githubButtonTXT");
+                sThanksButton.Text = ParseIt(LanguageFile, "upperMenu", "sThanksButtonTXT");
             }
-
         }
         public void updateTheme()
         {
             MetroColorStyle scheme = ucfg.Default.scheme;
-            this.Style = scheme;
+            Style = scheme;
             metroPanel1.Style = scheme;
             editorControl.Style = scheme;
             statusLabel.Style = scheme;
-            this.Opacity = ucfg.Default.opac;
+            Opacity = ucfg.Default.opac;
             if (ucfg.Default.theme == "Light")
             {
-                this.Theme = MetroFramework.MetroThemeStyle.Default;
-                metroPanel1.Theme = MetroFramework.MetroThemeStyle.Default;
-                editorControl.Theme = MetroFramework.MetroThemeStyle.Default;
-                statusLabel.Theme = MetroFramework.MetroThemeStyle.Default;
+                Theme = MetroThemeStyle.Default;
+                metroPanel1.Theme = MetroThemeStyle.Default;
+                editorControl.Theme = MetroThemeStyle.Default;
+                statusLabel.Theme = MetroThemeStyle.Default;
                 upperMenu.BackColor = Color.White;
                 upperMenu.ForeColor = Color.FromArgb(10, 10, 10);
             }
@@ -113,23 +100,23 @@ namespace PrivEdit
         {
             try
             {
-                foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+                foreach (edSci item in editorControl.SelectedTab.Controls)
                 {
-                    this.Text = "Priv Edit - " + editorControl.SelectedTab.Text;
+                    Text = "Priv Edit - " + editorControl.SelectedTab.Text;
                 }
             }
             catch
             {
-                this.Text = "Priv Edit";
+                Text = "Priv Edit";
             }
-            this.UpdateStyles();
+            UpdateStyles();
         }
         public void New()
         {
-            PrivLib.edSci Tab = new PrivLib.edSci();
-            Tab.TabID = global.IDCounter;
+            edSci Tab = new edSci();
+            Tab.TabID = IDCounter;
             Tab.Path = "null";
-            Tab.Name = "editor-" + global.IDCounter;
+            Tab.Name = "editor-" + IDCounter;
             Tab.Dock = DockStyle.Fill;
             Tab.Text = "";
             Tab.KeyPress += new KeyPressEventHandler(this.scintillaAsciiBlocker);
@@ -148,7 +135,7 @@ namespace PrivEdit
             }
             if (ucfg.Default.language != "EN")
             {
-                editorControl.TabPages.Add(Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "newFile") + " [x]");
+                editorControl.TabPages.Add(ParseIt(LanguageFile, "texts", "newFile") + " [x]");
             }
             else
             {
@@ -156,18 +143,18 @@ namespace PrivEdit
             }
             editorControl.SelectTab(editorControl.TabPages.Count-1);
             editorControl.SelectedTab.Controls.Add(Tab);
-            global.IDCounter++;
+            IDCounter++;
         }
         public void OpenFile(string filename)
         {
-            PrivLib.edSci Tab = new PrivLib.edSci();
-            Tab.TabID = global.IDCounter;
+            edSci Tab = new edSci();
+            Tab.TabID = IDCounter;
             Tab.Path = filename;
-            Tab.setVisibleLanguage((ScintillaNET.Lexer)PrivLib.getLanguage(PrivLib.splitPath(filename)));
+            Tab.setVisibleLanguage((ScintillaNET.Lexer)getLanguage(splitPath(filename)));
             Tab.UpdateUI += new EventHandler<ScintillaNET.UpdateUIEventArgs>(this.CursorDetector);
             Tab.KeyPress += new KeyPressEventHandler(this.scintillaAsciiBlocker);
             Tab.TextChanged += new EventHandler(this.LineCounter);
-            Tab.Name = "editor-" + global.IDCounter;
+            Tab.Name = "editor-" + IDCounter;
             Tab.Dock = DockStyle.Fill;
             Tab.Text = File.ReadAllText(filename);
             Tab.EmptyUndoBuffer();
@@ -182,10 +169,10 @@ namespace PrivEdit
                     Tab.CaretForeColor = Color.FromArgb(254, 254, 254);
                 }
             }
-            editorControl.TabPages.Add(PrivLib.splitPath(filename) + " [x]");
+            editorControl.TabPages.Add(splitPath(filename) + " [x]");
             editorControl.SelectTab(editorControl.TabPages.Count-1);
             editorControl.SelectedTab.Controls.Add(Tab);
-            global.IDCounter++;
+            IDCounter++;
         }
         private void SaveAs()
         {
@@ -194,11 +181,11 @@ namespace PrivEdit
                 var result = FileSaver.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+                    foreach (edSci item in editorControl.SelectedTab.Controls)
                     {
                         File.WriteAllText(FileSaver.FileName, item.Text);
                         item.Path = FileSaver.FileName;
-                        editorControl.SelectedTab.Text = PrivLib.splitPath(FileSaver.FileName);
+                        editorControl.SelectedTab.Text = splitPath(FileSaver.FileName);
                         UpdateHeader();
                     }
                 }
@@ -207,12 +194,12 @@ namespace PrivEdit
         private void Save()
         {
             if (editorControl.TabCount > 0) { 
-                foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+                foreach (edSci item in editorControl.SelectedTab.Controls)
                 {
                     if (item.Path != "" && item.Path != "null")
                     {
                         File.WriteAllText(item.Path, item.Text);
-                        editorControl.SelectedTab.Text = PrivLib.splitPath(item.Path);
+                        editorControl.SelectedTab.Text = splitPath(item.Path) + " [x]";
                         UpdateHeader();
                     }
                     else
@@ -224,7 +211,6 @@ namespace PrivEdit
         }
         private void Open()
         {
-            int size = -1;
             DialogResult dialogResult = FileOpener.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
@@ -239,7 +225,7 @@ namespace PrivEdit
                     {
                         if (ucfg.Default.language != "EN")
                         {
-                            MessageBox.Show(Parsers.JSON.parser.ParseIt(LanguageFile, "messages", "openFileError"), "ERROR!");
+                            MessageBox.Show(ParseIt(LanguageFile, "messages", "openFileError"), "ERROR!");
                         }
                         else
                         {
@@ -252,7 +238,7 @@ namespace PrivEdit
                 {
                     if (ucfg.Default.language != "EN")
                     {
-                        MessageBox.Show(Parsers.JSON.parser.ParseIt(LanguageFile, "messages", "fileFindError"), "ERROR!");
+                        MessageBox.Show(ParseIt(LanguageFile, "messages", "fileFindError"), "ERROR!");
                     }
                     else
                     {
@@ -283,15 +269,15 @@ namespace PrivEdit
             //foreach (MetroFramework.Controls.MetroTabPageCollection item in editorControl.TabPages)
             //{
 
-            //    foreach (MetroFramework.Controls.MetroTabPage.ControlCollection titem in item)
+            //    foreach (ControlCollection titem in item)
             //    {
-            //        foreach (PrivLib.edSci kitem in titem)
+            //        foreach (edSci kitem in titem)
             //        {
             //            kitem.checkChanged();
             //            if (kitem.ChangedPoint)
             //            {
             //                editorControl.SelectTab(n);
-            //                DialogResult dr = MetroMessageBox.Show(this, "\n\n" + kitem.Filename + " adlı dosyayı kaydetmek istermisiniz ?", "Hayır | Evet", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                DialogResult dr = MetroMessageBox.Show(this, "\n\n" + kitem.Filename + " " + ParseIt(LanguageFile, "messages", "saveFileMsg"), "PrivEdit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             //                if (dr == DialogResult.Yes)
             //                {
             //                    SaveAs();
@@ -325,6 +311,7 @@ namespace PrivEdit
             //////////////////////////////////////////////////////////////////////////////////////////
             //Will be fixed but i don't have time for this may be later...
             //////////////////////////////////////////////////////////////////////////////////////////
+            Environment.Exit(0);
         }
         //////////////////////////////////////////////////////////////////////////////////////////
         //Will be fixed but i don't have time for this may be later...
@@ -365,14 +352,14 @@ namespace PrivEdit
         }
         private void geriALToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+            foreach (edSci item in editorControl.SelectedTab.Controls)
             {
                 item.Undo();
             }
         }
         private void birAdımİleriToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+            foreach (edSci item in editorControl.SelectedTab.Controls)
             {
                 item.Redo();
             }
@@ -383,7 +370,7 @@ namespace PrivEdit
         }
         private void temizleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+            foreach (edSci item in editorControl.SelectedTab.Controls)
             {
                 item.Text = "";
             }
@@ -406,11 +393,11 @@ namespace PrivEdit
         }
         private void CursorDetector(object sender, ScintillaNET.UpdateUIEventArgs e)
         {
-            foreach (PrivLib.edSci item in editorControl.SelectedTab.Controls)
+            foreach (edSci item in editorControl.SelectedTab.Controls)
             {
                 if(ucfg.Default.language != "EN")
                 {
-                    statusLabel.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "line")  + " : " + item.CurrentLine.ToString() + Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "character") + ", : " + (item.CurrentPosition - item.Lines[item.LineFromPosition(item.CurrentPosition)].Position) + Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "position") + " : " + item.CurrentPosition.ToString();
+                    statusLabel.Text = ParseIt(LanguageFile, "texts", "line")  + " : " + item.CurrentLine.ToString() + ParseIt(LanguageFile, "texts", "character") + ", : " + (item.CurrentPosition - item.Lines[item.LineFromPosition(item.CurrentPosition)].Position) + ParseIt(LanguageFile, "texts", "position") + " : " + item.CurrentPosition.ToString();
                 }
                 else
                 {
@@ -420,7 +407,7 @@ namespace PrivEdit
         }
         private void LineCounter(object sender, EventArgs e)
         {
-            PrivLib.edSci handler = (PrivLib.edSci)sender;
+            edSci handler = (edSci)sender;
             if(handler.Filename != "null")
             {
                 try { 
@@ -442,7 +429,7 @@ namespace PrivEdit
             {
                 if(ucfg.Default.language != "EN")
                 {
-                    editorControl.SelectedTab.Text = Parsers.JSON.parser.ParseIt(LanguageFile, "texts", "newFile") + "*" + " [x]";
+                    editorControl.SelectedTab.Text = ParseIt(LanguageFile, "texts", "newFile") + "*" + " [x]";
                 }
                 else
                 {
@@ -472,8 +459,8 @@ namespace PrivEdit
             TabControl tc = (TabControl)sender;
             Point p = e.Location;
             int _tabWidth = 0;
-            _tabWidth = this.editorControl.GetTabRect(tc.SelectedIndex).Width - (_imgHitArea.X);
-            Rectangle r = this.editorControl.GetTabRect(tc.SelectedIndex);
+            _tabWidth = editorControl.GetTabRect(tc.SelectedIndex).Width - (_imgHitArea.X);
+            Rectangle r = editorControl.GetTabRect(tc.SelectedIndex);
             r.Offset(_tabWidth, _imgHitArea.Y);
             r.Width = 16;
             r.Height = 16;
@@ -483,6 +470,9 @@ namespace PrivEdit
                 {
                     TabPage TabP = (TabPage)tc.TabPages[tc.SelectedIndex];
                     tc.TabPages.Remove(TabP);
+                    Text = "PrivEdit";
+                    statusLabel.Text = "";
+                    Refresh();
                 }
             }
         }

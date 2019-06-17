@@ -567,28 +567,28 @@
             // 
             this.authorsButton.Enabled = false;
             this.authorsButton.Name = "authorsButton";
-            this.authorsButton.Size = new System.Drawing.Size(180, 22);
+            this.authorsButton.Size = new System.Drawing.Size(152, 22);
             this.authorsButton.Text = "Authors";
             // 
             // youtubeButton
             // 
             this.youtubeButton.Enabled = false;
             this.youtubeButton.Name = "youtubeButton";
-            this.youtubeButton.Size = new System.Drawing.Size(180, 22);
+            this.youtubeButton.Size = new System.Drawing.Size(152, 22);
             this.youtubeButton.Text = "YouTube";
             // 
             // githubButton
             // 
             this.githubButton.Enabled = false;
             this.githubButton.Name = "githubButton";
-            this.githubButton.Size = new System.Drawing.Size(180, 22);
+            this.githubButton.Size = new System.Drawing.Size(152, 22);
             this.githubButton.Text = "GitHub";
             // 
             // sThanksButton
             // 
             this.sThanksButton.Enabled = false;
             this.sThanksButton.Name = "sThanksButton";
-            this.sThanksButton.Size = new System.Drawing.Size(180, 22);
+            this.sThanksButton.Size = new System.Drawing.Size(152, 22);
             this.sThanksButton.Text = "Special Thanks";
             // 
             // PrivEditForm
@@ -603,7 +603,7 @@
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "PrivEditForm";
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
-            this.Style = MetroFramework.MetroColorStyle.Black;
+            this.Style = MetroFramework.MetroColorStyle.White;
             this.Text = "PrivEdit";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrivEditForm_FormClosing);

@@ -13,7 +13,7 @@ namespace PrivEdit
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PrivEditForm());
+            Application.Run(new LoadScreen());
         }
     }
 }
