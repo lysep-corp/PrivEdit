@@ -8,8 +8,8 @@ dd.mm.yyyy
 +Not closing fixed<br/>
 +Splash screen added<br/>
 +Now settings showing selected language<br/>
-+Other language sport activated<br/>
-+Exit message added the language<br/>
++"Other GUI Language" support activated<br/>
++Exit message added to the language<br/>
 +Can't close file after saving bug fixed<br/>
 +Performance Upgrades (Joke)<br/>
 -cylops<br/>
